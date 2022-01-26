@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Stores Manager</title>
+    <script src="https://kit.fontawesome.com/bcb7364304.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/media.css"/>
+</head>
+
+<body>
+    <div id="main-container" class="main-container">
+        <!-- content begin -->
+        <aside class="stores-list">
+            <div class="stores-list-title"><h2>Stores List</h2></div>
+            <form action="" id="findStoresByText" class="search-store-form">
+                <input name="search" id="storesSearchField" placeholder="Search" type="search" />
+                <button id="findStores" type="submit" class="search-button" form="findStoresByText">
+                        <i class="fas fa-search"></i>
+                    </button>
+                <button id="showStores" type="submit" class="sinh-button">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+            </form>
+            <div class="arrow">
+                <i class="fas fa-chevron-up"></i>
+                <div class="spacer"></div>
+                <i class="fas fa-thumbtack"></i>
+            </div>
+            <div id="storesList" class="store-item"></div>
+            <footer class="left-footer">
+                <button id="createStoreForm" class="create">
+                        <i class="fas fa-plus"></i>
+                        <label> Create</label>
+                    </button>
+            </footer>
+        </aside>
+        <!-- stores list close -->
+
+        <!-- store  details begin -->
+
+        <section class="store-details">
+            <div class="loader">
+                <div class="loader_inner"></div>
+            </div>
+            <div id="storeDetails" class="info display-none">
+                <div class="details-list-title">
+                   <h3>Store Details</h3>  
+                </div>
+                <div class="store-info">
+                    <div class="row">
+                        <span class="title">Email: </span>
+                        <span id="email" class="email">klimkodima@tut.by</span>
+                    </div>
+                    <div class="row">
+                        <span class="title">Phone Number</span>>
+                        <span id="phone" class="phone">klimkodima@tut.by</span>
+                    </div>
+                    <div class="row">
+                        <span class="title">Address: </span>
+                        <span id="address" class="address">klimkodima@tut.by</span>
+                    </div>
+                    <div class="row">
+                        <span class="title">Establishment Date </span>
+                        <span id="establishmentDate" class="establishment-date">klimkodima@tut.by</span>
+                    </div>
+                    <div class="row">
+                        <span class="title">Floor Area </span>
+                        <span id="floorAreaInfo" class="floor-area">klimkodima@tut.by</span>
+                    </div>
+                    <div class="row"></div>
+                    <div class="row"></div>
+                </div>
+                <div class="arrow">
+                    <i class="fas fa-chevron-up"></i>
+                    <div class="spacer"></div>
+                    <i class="fas fa-thumbtack"></i>
+                </div>
+                <section class="stock">
+                    <ul id="statusBar" class="choose-stage">
+                        <li class="icon-container all-center" data-filter="ALL"><button id="totalCount" value="total" class="quadrate-button">
+                            <label for="totallRadio" id="totalCount" class="bold text-total"></label> 
+                            </button> All
+                        </li>
+                        <li class="in-stock icon-container" data-filter="OK"><button id="selectInStock" class="green-button round-button">
+                                <i class="far fa-check-square"></i>
+                                </button>
+                            <label id="inStockCount">
+                            </label>
+                        </li>
+                        <li class="storage icon-container" data-filter="STORAGE"><button id="selectStorage" class="orange-button round-button">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </button>
+                            <label id="storageCount">
+                             </label>
+                        </li>
+                        <li class="out-stock icon-container" data-filter="OUT_OF_STOCK"><button id="selectOutOfStock" class="red-button round-button">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </button>
+                            <label id="outStockCount">
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="stock-titles">
+                        <span class="stock-title">
+                          
+                            </span>
+                        <span class="stock-title">
+                              OK
+                            </span>
+                        <span class="stock-title">
+                                Storage
+                            </span>
+                        <span class="stock-title">
+                                Out of stock
+                            </span>
+                    </div>
+                </section>
+                <section class="products">
+                    <div class="line-items-container">
+                        <p class="products-table-title">Products</p>
+                        <form class="products-form">
+                            <input id="searchProduct" class="products-input" type="text" placeholder="Enter value to search" />
+                            <i id="findProducts" class="fa fa-search js-table-search-button"></i>
+                        </form>
+                    </div>
+                    <div class="store-products">
+                        <table id="productsTable">
+							<thead> 
+                                <tr>
+                                    <th>
+                                        <i class="fa fa-sort" data-name="sort" data-state="none" data-sort="string"></i> Name
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort-desc" data-name="sort" data-state="none" data-sort="number"></i> Price
+                                    </th>
+                                    <th></th>
+                                    <th>
+                                        <i class="fa fa-sort-asc" data-name="sort" data-state="none" data-sort="string"></i> Specs
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort" data-name="sort" data-state="none" data-sort="string"></i> SupplierInfo
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort" data-name="sort" data-state="none" data-sort="string"></i> Country of origin
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort" data-name="sort" data-state="none" data-sort="string"></i> Prod company
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-sort" data-name="sort" data-state="none" data-sort="number"></i> Rating
+                                    </th>
+                                    <th></th>
+                                </tr>
+							</thead> 
+                            <tbody id="productsInfo"></tbody>
+                        </table>
+                    </div>
+					 <footer class="right-footer">
+                    <button id="createProductFormButton" class="create">
+                        <i class="fas fa-plus"></i>
+                        <label> Create</label>
+                    </button>
+                    <button class="delete" id="deleteStoreButton">
+                        <i class="fas fa-plus"></i>
+                        <label> Delete</label>
+                    </button>
+                </footer>
+                </section>
+            </div>
+            <div id="unselectedWindow" class="not-products-window display-flex">
+                <p class="def-title bold">Store is not selected</p>
+                <div class="def-body">
+                    <img class="def-image" src="images/store-alt-solid.svg" />
+                    <p class="def-massage bold">
+                        The store is not selected
+                    </p>
+                    <p class="request">
+                        Please select the store to proceed.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="createProductFormContainer" class="modal-window-container display-none">
+        <form id="createProductForm" class="modal-window ">
+			<fieldset> 
+            <legend class="form-name-title">Create new product</legend>
+            <div class="form-name-body">
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Name:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="text" class="modal-input" name="Name" placeholder="Enter name" />
+                </div>
+                <span class="error-message">Name must not be empty. Minimum 3, maximum 30 characters.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Price:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="number" max="10000" class="modal-input" name="Price" placeholder="Enter price" />
+                    <p>USD</p>
+                </div>
+                <span class="error-message">Price must not be empty.</span>
+
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Specs:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <textarea rows="3" name="Specs" class="modal-window-textarea" placeholder="Enter product specs"></textarea>
+                </div>
+                <span class="error-message">Specs must not be empty. Minimum 3, maximum 300 characters.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Rating:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="number" min="1" max="5" class="modal-input" name="Rating" placeholder="Enter rating 1..5" />
+                </div>
+                <span class="error-message">Rating must be 1..5.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Supplier Info:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <textarea rows="3" name="SupplierInfo" class="modal-window-textarea" placeholder="Enter supplier info"></textarea>
+                </div>
+                <span class="error-message">Supplier info must not be empty.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    </label class="modal-window-row">Made in:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="text" class="modal-input" name="Country" placeholder="Enter origin country" />
+                </div>
+                <span class="error-message">Field must not be empty.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row" class="modal-window-row">Production company name:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="textarea" class="modal-input" name="Company" placeholder="Enter manufacture name" />
+                </div>
+                <span class="error-message">Field must not be empty.</span>
+                <div class="modal-window-row-wrapper select">
+                    <i class=" fas fa-star  modal-star"></i>
+                    <label class="modal-window-row">Status:</label>
+                </div>
+                <select type="text" class="modal-window-select" name="Status" placeholder="Enter status">
+                    <option value="Status" selected>OK</option>
+                    <option value="Status">STORAGE</option>
+                    <option value="Status">OUT_OF_STOCK</option>
+                 </select>
+                <div class="modal-footer">
+                    <input type="submit" value="Create" id="createNewProduct" class="modal-button modal-create">
+                    <button  id="cancelCreateNewProduct" value="Cancel" class="modal-button">Cancel</button>
+                </div>
+            </div>
+			</fieldset> 
+        </form>
+    </div>
+    <div id="editProductFormContainer" class="modal-window-container display-none">
+        <form id="editProductForm" class="modal-window ">
+            <p class="form-name-title">Edit product</p>
+            <div class="form-name-body">
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Name:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="text" class="modal-input" name="Name" placeholder="Enter name" />
+                </div>
+                <span class="error-message">Name must not be empty. Minimum 3, maximum 30 characters.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Price:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="number" max="10000" class="modal-input" name="Price" placeholder="Enter price" />
+                    <p>USD</p>
+                </div>
+                <span class="error-message">Price must not be empty.</span>
+
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Specs:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <textarea rows="3" name="Specs" class="modal-window-textarea" placeholder="Enter product specs"></textarea>
+                </div>
+                <span class="error-message">Specs must not be empty. Minimum 3, maximum 300 characters.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Rating:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="number" min="1" max="5" class="modal-input" name="Rating" placeholder="Enter rating 1..5" />
+                </div>
+                <span class="error-message">Rating must be 1..5.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Supplier Info:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <textarea rows="3" name="SupplierInfo" class="modal-window-textarea" placeholder="Enter supplier info"></textarea>
+                </div>
+                <span class="error-message">Supplier info must not be empty.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    </label class="modal-window-row">Made in:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="text" class="modal-input" name="Country" placeholder="Enter origin country" />
+                </div>
+                <span class="error-message">Field must not be empty.</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row" class="modal-window-row">Production company name:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="textarea" class="modal-input" name="Company" placeholder="Enter manufacture name" />
+                </div>
+                <span class="error-message">Field must not be empty.</span>
+                <div class="modal-window-row-wrapper select">
+                    <i class=" fas fa-star  modal-star"></i>
+                    <label class="modal-window-row">Status:</label>
+                </div>
+                <select type="text" class="modal-window-select" name="Status" placeholder="Enter status">
+                    <option value="Status" selected>OK</option>
+                    <option value="Status">STORAGE</option>
+                    <option value="Status">OUT_OF_STOCK</option>
+                 </select>
+                <div class="modal-footer">
+                    <button type="submit" id="confirmEditditProduct" class="modal-button modal-create">Edit</button>
+                    <button type="submit" id="cancelEditProduct" value="cancel" class="modal-button"> Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="newStoreFormContainer" class="modal-window-container display-none">
+        <form id="newStoreForm" class="modal-window create-store">
+            <p class="form-name-title">Create new store</p>
+            <div class="form-name-body">
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Name:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="text" class="modal-input" name="Name" placeholder="Enter name" />
+                </div>
+                <span class="error-message">Enter mandatory field</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Email:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="email" class="modal-input" name="Email" placeholder="Enter email" />
+                </div>
+                <span class="error-message">Enter mandatory field</span>
+
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Phone number:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="tel" class="modal-input" name="PhoneNumber" placeholder="Enter phone number" />
+                </div>
+                <span class="error-message">Enter mandatory field</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Address:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="text" class="modal-input" name="Address" placeholder="Enter address" />
+                </div>
+                <span class="error-message">Enter mandatory field</span>
+
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    <label class="modal-window-row">Establishment date:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="date" class="modal-input" name="Established" />
+                </div>
+                <span class="error-message">Enter mandatory field</span>
+                <div class="modal-window-row-wrapper">
+                    <i class=" fas fa-star modal-star"></i>
+                    </label class="modal-window-row">Floor area:</label>
+                </div>
+                <div class="modal-window-row-wrapper">
+                    <input type="number" class="modal-input" name="FlorArea" placeholder="Enter floor area (in sq. m)" />
+                </div>
+                <span class="error-message">Enter mandatory field</span>
+                <div class="modal-footer">
+                    <button type="submit" id="createNewStore" class="modal-button modal-create">Create</button>
+                    <button type="submit" id="cancelCreateNewStore" value="cancel" class="modal-button"> Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="js/Model.js"></script>
+    <script src="js/View.js"></script>
+    <script src="js/Controller.js"></script>
+</body>
+
+</html>
